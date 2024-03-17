@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import authRouter from './routes/auth-route.js'
 import connectDB from './config/database.js'
 import * as dotenv from 'dotenv'
+import cors from 'cors'
 import imageRouter from './routes/image-route.js'
 
 dotenv.config()
@@ -17,7 +18,7 @@ await connectDB()
 app.get('/', (req, res) => {
   res.send('Welcome To Image Upload')
 })
-
+app.use(cors())
 app.use('/api/auth', authRouter)
 app.use('/api/image', imageRouter)
 app.listen(port, () => {

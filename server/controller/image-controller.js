@@ -1,6 +1,8 @@
 import { userModel } from "../models/user.model.js";
 import { imageValidation } from "../validators/validator.js";
 import { imageModel } from "../models/image.model.js";
+import cloudinary from "cloudinary"
+
 // @api - api/:id/image GET
 // @desc -  get images of  user
 //@access - protected
@@ -59,13 +61,14 @@ export const uploadImages = async (req,res) => {
       name,
       url
     })
+
     await newImage.save()
     if (newImage) {
       await userModel.findByIdAndUpdate(userExists._id,
         { "$push": { images_upload:newImage._id} },
         { "new": true, "upsert": true },
       );
-      console.log("dd")
+  
       res.status(201).json({
         status: true,
         content: {

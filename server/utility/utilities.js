@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import cloudinary from "cloudinary";
 // @description - to hash and secure password
 export const hashPassword = async (password) => {
   try {
@@ -29,3 +30,6 @@ export const validatePassword = async (password, userPassword) => {
     console.log(error)
   }
 }
+
+
+
